@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-   // https://retrofit-post.firebaseio.com/a.json
+    // https://retrofit-post.firebaseio.com/a.json
 
     String API_BASE_URL = "https://retrofit-post.firebaseio.com";
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                User user = new User(name.getText().toString(), email.getText().toString(),10, topics.getText().toString().split(","));
+                User user = new User(name.getText().toString(), email.getText().toString(), 10, topics.getText().toString().split(","));
 
                 sendnetworkrequest(user);
 
@@ -51,16 +51,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendnetworkrequest(User user) {
 
-
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         // add your other interceptors …
-
         // add logging as last interceptor
-        httpClient.addInterceptor(logging);
+
+        if (BuildConfig.DEBUG) {
+            httpClient.addInterceptor(logging);
+
+        }
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)

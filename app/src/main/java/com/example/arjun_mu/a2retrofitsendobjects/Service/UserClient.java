@@ -1,6 +1,7 @@
 package com.example.arjun_mu.a2retrofitsendobjects.Service;
 
 
+import com.example.arjun_mu.a2retrofitsendobjects.Model.Task;
 import com.example.arjun_mu.a2retrofitsendobjects.Model.User;
 
 import retrofit2.Call;
@@ -17,5 +18,9 @@ public interface UserClient {
     @POST("/new.json")
     Call<User> createAccount(@Body User user);
 
+
+
+    @POST("/tasks")
+    Call<Task> createTask(@Body Task task);
 
 }
