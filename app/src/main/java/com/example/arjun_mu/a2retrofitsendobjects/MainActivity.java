@@ -51,26 +51,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendnetworkrequest(User user) {
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        // set your desired log level
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        // add your other interceptors …
-        // add logging as last interceptor
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//
+//        // set your desired log level
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+//        // add your other interceptors …
+//
+//        // add logging as last interceptor
+//
+//        if (BuildConfig.DEBUG) {
+//            httpClient.addInterceptor(logging);
+//
+//        }
 
-        if (BuildConfig.DEBUG) {
-            httpClient.addInterceptor(logging);
+//        Retrofit.Builder builder = new Retrofit.Builder()
+//                .baseUrl(API_BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(httpClient.build());
+//
+//        Retrofit retrofit = builder.build();
+//
+//        UserClient client = retrofit.create(UserClient.class);
 
-        }
-
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.build());
-
-        Retrofit retrofit = builder.build();
-
-        UserClient client = retrofit.create(UserClient.class);
+        UserClient client = ServiceGeneratorWithLoggiing.createService(UserClient.class);
 
         Call<User> call = client.createAccount(user);
 
